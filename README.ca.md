@@ -26,6 +26,8 @@ Funciona en silenci en segon pla, entén missatges de text, notes de veu i imatg
 > **Instal·lació:** consulta [INSTALL.ca.md](INSTALL.ca.md) per a les instruccions detallades a Linux, macOS i Windows.
 >
 > **Documentació tècnica:** [Arquitectura, API i seguretat](docs/arquitectura.md).
+>
+> **Wiki:** [com funciona, comandes, configuració i API](https://github.com/ClawProject/TheClawRepo/wiki) (font: [docs/wiki](docs/wiki/Home.md)).
 
 ---
 

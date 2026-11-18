@@ -26,6 +26,8 @@ Lavora in silenzio in background, capisce messaggi di testo, note vocali e immag
 > **Installazione:** vedi [INSTALL.it.md](INSTALL.it.md) per le istruzioni dettagliate su Linux, macOS e Windows.
 >
 > **Documentazione tecnica:** [Architettura, API e sicurezza](docs/arquitectura.md).
+>
+> **Wiki:** [come funziona, comandi, configurazione e API](https://github.com/ClawProject/TheClawRepo/wiki) (fonte: [docs/wiki](docs/wiki/Home.md)).
 
 ---
 

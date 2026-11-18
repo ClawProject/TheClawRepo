@@ -26,6 +26,8 @@ Il travaille discrètement en arrière-plan, comprend les messages texte, les no
 > **Installation :** voir [INSTALL.fr.md](INSTALL.fr.md) pour les instructions détaillées sous Linux, macOS et Windows.
 >
 > **Documentation technique :** [Architecture, API et sécurité](docs/arquitectura.md).
+>
+> **Wiki :** [fonctionnement, commandes, configuration et API](https://github.com/ClawProject/TheClawRepo/wiki) (source : [docs/wiki](docs/wiki/Home.md)).
 
 ---
 

@@ -26,6 +26,8 @@ Er arbeitet leise im Hintergrund, versteht Textnachrichten, Sprachnachrichten un
 > **Installation:** Siehe [INSTALL.de.md](INSTALL.de.md) für ausführliche Anleitungen für Linux, macOS und Windows.
 >
 > **Technische Dokumentation:** [Architektur, API und Sicherheit](docs/arquitectura.md).
+>
+> **Wiki:** [Funktionsweise, Befehle, Konfiguration und API](https://github.com/ClawProject/TheClawRepo/wiki) (Quelle: [docs/wiki](docs/wiki/Home.md)).
 
 ---
 

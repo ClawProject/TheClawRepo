@@ -26,6 +26,8 @@ Claw مساعد على واتساب يعمل بذكاء اصطناعي محلي�
 > **التثبيت:** راجع [INSTALL.ar.md](INSTALL.ar.md) للحصول على خطوات مفصّلة في Linux وmacOS وWindows.
 >
 > **التوثيق التقني:** [البنية وواجهة API والأمان](docs/arquitectura.md).
+>
+> **الويكي:** [كيف يعمل، الأوامر، الإعدادات وواجهة API](https://github.com/ClawProject/TheClawRepo/wiki) (المصدر: [docs/wiki](docs/wiki/Home.md)).
 
 ---
 

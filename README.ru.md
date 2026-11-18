@@ -26,6 +26,8 @@ Claw — это ассистент WhatsApp с локальным ИИ, кото
 > **Установка:** см. [INSTALL.ru.md](INSTALL.ru.md) с подробными инструкциями для Linux, macOS и Windows.
 >
 > **Техническая документация:** [Архитектура, API и безопасность](docs/arquitectura.md).
+>
+> **Вики:** [как это работает, команды, настройки и API](https://github.com/ClawProject/TheClawRepo/wiki) (источник: [docs/wiki](docs/wiki/Home.md)).
 
 ---
 

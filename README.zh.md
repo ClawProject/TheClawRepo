@@ -26,6 +26,8 @@ Claw 是一个本地 AI 的 WhatsApp 助手，负责跟进作业、考试、学�
 > **安装：** 详见 [INSTALL.zh.md](INSTALL.zh.md)，包含 Linux、macOS 和 Windows 的完整步骤。
 >
 > **技术文档：** [架构、API 与安全](docs/arquitectura.md)。
+>
+> **Wiki：**[工作原理、命令、配置和 API](https://github.com/ClawProject/TheClawRepo/wiki)（源文件：[docs/wiki](docs/wiki/Home.md)）。
 
 ---
 

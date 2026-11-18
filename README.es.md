@@ -26,6 +26,8 @@ Funciona en silencio en segundo plano, entiende mensajes de texto, notas de voz 
 > **Instalación:** consulta [INSTALL.es.md](INSTALL.es.md) para las instrucciones detalladas en Linux, macOS y Windows.
 >
 > **Documentación técnica:** [Arquitectura, API y seguridad](docs/arquitectura.md).
+>
+> **Wiki:** [cómo funciona, comandos, configuración y API](https://github.com/ClawProject/TheClawRepo/wiki) (fuente: [docs/wiki](docs/wiki/Home.md)).
 
 ---
 

@@ -17,7 +17,7 @@ Detalles que ya resuelve el código:
 
 ## Servicio Python
 
-FastAPI escuchando **solo** en `127.0.0.1:5050`.
+FastAPI que por defecto escucha **solo** en `127.0.0.1:5050`; el host y el puerto salen de `PYTHON_AI_URL`, que leen tanto Node como el propio servidor.
 
 | Ruta | Qué hace |
 | --- | --- |
@@ -27,7 +27,7 @@ FastAPI escuchando **solo** en `127.0.0.1:5050`.
 | `POST /warmup` | Precarga el modelo de voz |
 | `GET /` | Información del servicio |
 
-Variables que lee (`python/server.py` y README del servicio): `PYTHON_AI_URL` en el lado de Node, y en el servicio `PYTHON_WHISPER_MODEL`, `PYTHON_WHISPER_DEVICE`, `PYTHON_IMAGE_MODEL`, además de los límites de cada petición. Los valores por defecto documentados son `base` para Whisper y `stable-diffusion-v1-5/stable-diffusion-v1-5` para imágenes.
+Variables del servicio: `PYTHON_WHISPER_MODEL` (`base`), `PYTHON_WHISPER_DEVICE` (`auto`), `PYTHON_IMAGE_MODEL` (`stable-diffusion-v1-5/stable-diffusion-v1-5`), `PYTHON_IMAGE_UNLOAD`, `PYTHON_IMAGE_MAX_SIDE` y `PYTHON_MODELS_DIR`. En el lado de Node, además de `PYTHON_AI_URL`, están `PYTHON_AI_TIMEOUT_MS`, `PYTHON_AI_HEALTH_TIMEOUT_MS` y `PYTHON_AI_FALLBACK`.
 
 Arranque:
 
@@ -53,7 +53,7 @@ Apagadas de fábrica (`IMAGE_GEN_ENABLED=false`) y, aunque se enciendan, **solo 
 
 Ajustes de calidad en `config.js`: 20 pasos, 512×512, CFG 7, muestreador `dpm++2m` con `karras`, semilla -1 (aleatoria) y un prompt negativo largo que quita texto, marcas de agua y anatomías raras. `IMAGE_GEN_ENHANCE=true` traduce y mejora el prompt al inglés antes de dibujar.
 
-Va **de una en una**: si ya está dibujando, responde con un aviso en vez de encolar (la GPU pequeña no aguanta dos). El timeout es de 300 s.
+Va **casi de una en una**: admite una generación en marcha y otra esperando turno (`MAX_ESPERANDO = 1`); a partir de ahí responde con un aviso en vez de encolar más (la GPU pequeña no aguanta dos). El timeout es de 300 s.
 
 ## Archivos que llegan al grupo
 

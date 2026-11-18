@@ -49,9 +49,9 @@ Precedencia al cargar `.env`: primero el entorno real del sistema, luego `./.env
 | Variable | Por defecto | Para qué |
 | --- | --- | --- |
 | `REMINDER_ENABLED` | `true` | Avisos de exámenes |
-| `REMINDER_HOUR` | `20` | Hora del aviso la tarde anterior |
+| `REMINDER_HOUR` | `20` | Hora de los avisos de tarde: el día antes y el de antelación |
 | `REMINDER_MORNING_HOUR` | `8` | Hora del aviso el día del examen |
-| `REMINDER_ADVANCE_DAYS` | `3` | Días de antelación del aviso previo |
+| `REMINDER_ADVANCE_DAYS` | `3` | Días de antelación del aviso previo (solo cuenta a partir de 2) |
 | `SUMMARY_ENABLED` | `true` | Resumen semanal |
 | `SUMMARY_DAY` / `SUMMARY_HOUR` | `0` / `19` | Día (0 = domingo) y hora del resumen |
 | `SUMMARY_MAX_MESSAGES` | `200` | Tope de mensajes para resumir |
@@ -133,6 +133,22 @@ Se guardan en la tabla `settings` con el prefijo `cfg:` y se aplican al momento 
 
 Uso: `!claw ajustes`, `!claw ajustes ventana 30`, `!claw ajustes personalidad pirata`. Los ajustes se ven y se cambian **solo por privado** y solo el dueño.
 
-## Variables que no están en `.env.example`
+## Qué hay y qué no hay en `.env.example`
 
-`config.js` lee bastantes más variables que las que aparecen en el ejemplo: `PICKLEBRAIN_DATA_DIR`, `PICKLEBRAIN_DB`, `TZ`, `CHESS_THINK_MS`, `CLEANUP_EXAM_GRACE_DAYS`, `CLEANUP_REMOVE_ENTRIES`, `CLEANUP_INTERVAL_MINUTES`, `NGROK_ENABLED`, `NGROK_DOMAIN`, `WELCOME_ALWAYS`, `WELCOME_MESSAGE`, `COUNT_SWEARS`, `SWEAR_ALERT`, `SWEAR_COOLDOWN`, `IMAGE_GEN_*` completas y `WEB_DEBUG_CODE`. El código de `src/config.js` es la fuente de verdad.
+La plantilla trae las variables de uso habitual, muchas comentadas con `#` (así se quedan en su valor por defecto si no las descomentas): Ollama, WhatsApp, web y SMTP, datos, voz, servicio Python, imágenes, recordatorios, personalidad y archivos.
+
+Estas se leen en `src/config.js` pero **no aparecen** en la plantilla; si las necesitas, añádelas a mano:
+
+```text
+PRIVATE_MODE, APUNTA_LIBRE, CONTEXT_MESSAGES, ANSWER_WINDOW_MINUTES,
+CLAW_MAX_PER_MINUTE, MIN_SECONDS_BETWEEN_REPLIES, ACK_SAVES,
+STORE_MESSAGES, STORE_MESSAGES_DAYS, SUMMARY_DAY, SUMMARY_HOUR,
+SUMMARY_MAX_MESSAGES, CHANGELOG_NOTIFY, DOCS_ENABLED, MEDIA_MAX_TOTAL_MB,
+MEDIA_SEND_MAX, COUNT_SWEARS, SWEAR_ALERT, SWEAR_COOLDOWN, CHESS_THINK_MS,
+PREVENT_SLEEP, KEEP_DISPLAY, CLEANUP_EXAM_GRACE_DAYS, CLEANUP_REMOVE_ENTRIES,
+WELCOME_ALWAYS, WELCOME_MESSAGE, NGROK_ENABLED, NGROK_DOMAIN
+```
+
+Una variable que sí está en la plantilla y no es de `config.js`: `PORT` (por defecto 3000), que lee el servidor HTTP.
+
+`src/config.js` sigue siendo la fuente de verdad: cualquier variable que no aparezca ahí, aunque esté en la plantilla, no hace nada.

@@ -10,7 +10,7 @@ Todo el razonamiento ocurre en el ordenador: `src/ollama.js` habla por HTTP con 
 | Respaldo si falla el principal | `OLLAMA_MODEL_FALLBACK` | `qwen2.5:3b` |
 | Clasificador de apuntes | `OLLAMA_MODEL_BRAIN` | `qwen2.5:3b` |
 
-Con `!claw ia` se ve el modelo activo y los instalados; `!claw ia <modelo>` lo cambia en caliente (se guarda en la base y sobrevive al reinicio).
+Con `!claw ia` se ve el modelo activo y los instalados; `!claw ia <modelo>` lo cambia en caliente (solo administradores; se guarda en la base y sobrevive al reinicio).
 
 ## Cómo responde Claw
 

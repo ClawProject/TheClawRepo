@@ -1,6 +1,6 @@
 # Web y API
 
-La web la sirve el propio PickleBrain en `127.0.0.1:3000` (`src/server.js`), no un hosting externo. `docs/index.html` es la portada y `docs/entrar/index.html` la pantalla de acceso. Ábrela siempre desde la dirección del servidor: con `file://` no funcionan ni la sesión ni la API.
+La web la sirve el propio PickleBrain en `127.0.0.1:3000` (`src/server.js`; el puerto se cambia con `PORT`), no un hosting externo. `docs/index.html` es la portada y `docs/entrar/index.html` la pantalla de acceso. Ábrela siempre desde la dirección del servidor: con `file://` no funcionan ni la sesión ni la API.
 
 ## Rutas
 
@@ -61,4 +61,4 @@ La API anuncia el enlace de descarga del APK adjunto a la última release de Git
 
 ## Qué se sirve y qué no
 
-El servidor entrega solo las páginas de `docs/` y responde con JSON en `/api/*`. Los datos (`data/`), el `.env` y el código fuente no se publican. Para exponer el bot fuera de la red local hace falta un túnel o un proxy propio; `NGROK_ENABLED` y `NGROK_DOMAIN` existen para ese escenario, pero el dominio por defecto es solo un ejemplo.
+El servidor no es un servidor de archivos estático: sirve `docs/index.html` en `/`, `docs/entrar/index.html` en `/entrar/` y la página de arranque en `/setup`, y responde con JSON en `/api/*`. Los datos (`data/`), el `.env` y el código fuente no se publican. Para exponer el bot fuera de la red local hace falta un túnel o un proxy propio; `NGROK_ENABLED` y `NGROK_DOMAIN` existen para ese escenario, pero el dominio por defecto es solo un ejemplo.

@@ -6,19 +6,21 @@
 // de mirar nada. Así `!claw homework` y `!claw deberes` acaban en el mismo sitio.
 //
 // Todo se compara normalizado (minúsculas y sin acentos), igual que en router.js.
+// Cada comando tiene al menos una palabra por idioma; las listas del router
+// (prohibir, apuntes, apunta, palabrotas, vetados) solo ven ya el nombre canónico.
 
 const ALIAS = {
   ayuda: ['help', 'ajuda', 'aide', 'hilfe', 'aiuto', 'помощь', 'مساعدة', '帮助'],
   estado: ['status', 'estat', 'statut', 'zustand', 'stato', 'состояние', 'الحالة', '状态'],
   ia: ['ai', 'ki', 'model', 'modello', 'ии', 'модель', 'نموذج', 'ذكاء', '模型', '人工智能'],
-  aqui: ['here', 'join', 'aquí', 'aci', 'ici', 'aqui', 'hier', 'qui', 'здесь', 'هنا', '这里'],
+  aqui: ['here', 'join', 'aquí', 'aci', 'ici', 'hier', 'qui', 'здесь', 'هنا', '这里'],
   fuera: ['leave', 'quit', 'fora', 'quitter', 'sortir', 'sair', 'verlassen', 'esci', 'выйти', 'خروج', '离开'],
   ajustes: [
-    'settings', 'config', 'ajustos', 'reglages', 'réglages', 'einstellungen', 'impostazioni',
-    'настройки', 'إعدادات', '设置'
+    'settings', 'config', 'ajustos', 'reglages', 'réglages', 'configuracoes', 'configurações',
+    'einstellungen', 'impostazioni', 'настройки', 'إعدادات', '设置'
   ],
-  admins: ['админы', 'مشرفون', '管理员'],
-  prohibir: ['block', 'ban', 'bloquear', 'bloquer', 'sperren', 'blocca', 'запретить', 'حظر', '屏蔽'],
+  admins: ['administradors', 'administratoren', 'amministratori', 'админы', 'مشرفون', '管理员'],
+  prohibir: ['block', 'ban', 'blocar', 'bloquear', 'bloquer', 'sperren', 'blocca', 'запретить', 'حظر', '屏蔽'],
   permitir: [
     'unblock', 'allow', 'desbloquear', 'debloquer', 'débloquer', 'permetre', 'entsperren', 'sblocca',
     'разрешить', 'إلغاء', '取消屏蔽'
@@ -32,8 +34,11 @@ const ALIAS = {
     'обслуживание', 'صيانة', '维护'
   ],
   apuntes: ['notes', 'apunts', 'notas', 'notizen', 'appunti', 'записи', 'ملاحظات', '笔记'],
-  palabrotas: ['swears', 'swear', 'insults', 'fluchtworte', 'tacchi', 'ругательства', 'شتائم', '脏话'],
-  apunta: ['add', 'apuntar', 'ajoute', 'adiciona', 'hinzufügen', 'aggiungi', 'добавь', 'أضف', '添加'],
+  palabrotas: [
+    'swears', 'swear', 'insults', 'insultes', 'paraulotes', 'palavroes', 'palavrões',
+    'schimpfwoerter', 'schimpfwörter', 'parolacce', 'ругательства', 'شتائم', '脏话'
+  ],
+  apunta: ['add', 'apuntar', 'afegeix', 'ajoute', 'adiciona', 'hinzufügen', 'aggiungi', 'добавь', 'أضف', '添加'],
   deberes: [
     'homework', 'hw', 'deures', 'devoirs', 'deveres', 'hausaufgaben', 'compiti', 'домашние', 'واجبات', '作业'
   ],
@@ -52,8 +57,12 @@ const ALIAS = {
     'summary', 'resum', 'résumé', 'resume', 'resumo', 'zusammenfassung', 'riassunto', 'сводка', 'ملخص',
     '摘要'
   ],
-  novedades: ['news', 'changelog', 'neuigkeiten', 'nouveautés', 'novità', 'новости', 'جديد', '更新'],
-  busca: ['search', 'cerca', 'cherche', 'suche', 'поиск', 'ابحث', '搜索'],
+  novedades: [
+    'news', 'changelog', 'novetats', 'nouveautés', 'novidades', 'neuigkeiten', 'novità', 'новости',
+    'جديد', '更新'
+  ],
+  busca: ['search', 'cerca', 'cherche', 'procurar', 'suche', 'поиск', 'ابحث', '搜索'],
+  imagen: ['image', 'imatge', 'imagem', 'bild', 'immagine', 'изображение', 'صورة', '图片', 'dibujo', 'dibuja'],
   ajedrez: ['chess', 'escacs', 'echecs', 'échecs', 'xadrez', 'schach', 'scacchi', 'шахматы', 'شطرنج', '国际象棋'],
   analiza: ['analyze', 'analyse', 'analitza', 'analisa', 'analysiere', 'analizza', 'анализ', 'تحليل', '分析'],
   personalidad: [

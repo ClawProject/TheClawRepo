@@ -2,6 +2,42 @@
 
 Every command starts with `!claw` (`!pickle` also works). Without the `!` it is not a command: the bare keyword `Claw` activates the conversational assistant.
 
+## Commands in your language
+
+The command name is translated for the ten languages of the website. `!claw homework` and `!claw deberes` land in the same place, and accents or capitals do not matter.
+
+| Command | en | ca | fr | pt | de | it | ru | ar | zh |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Homework | homework | deures | devoirs | deveres | hausaufgaben | compiti | домашние | واجبات | 作业 |
+| Exams | exams | examens | examens | provas | klausuren | verifiche | экзамены | امتحانات | 考试 |
+| Notes | notes | apunts | notes | notas | notizen | appunti | записи | ملاحظات | 笔记 |
+| Next | next | proper | prochain | proximo | nächste | prossimo | следующее | التالي | 下一个 |
+| Summary | summary | resum | resume | resumo | zusammenfassung | riassunto | сводка | ملخص | 摘要 |
+| Calendar | calendar | calendari | calendrier | calendario | kalender | calendario | календарь | تقويم | 日历 |
+| Search | search | cerca | cherche | procurar | suche | cerca | поиск | ابحث | 搜索 |
+| Image | image | imatge | image | imagem | bild | immagine | изображение | صورة | 图片 |
+| News | news | novetats | nouveautes | novidades | neuigkeiten | novita | новости | جديد | 更新 |
+| Swear ranking | swears | paraulotes | insultes | palavroes | schimpfwoerter | parolacce | ругательства | شتائم | 脏话 |
+| Done | done | fet | fait | feito | erledigt | fatto | готово | تم | 完成 |
+| Add | add | afegeix | ajoute | adiciona | hinzufügen | aggiungi | добавь | أضف | 添加 |
+| Forget | forget | oblida | oublie | esquece | vergiss | dimentica | забудь | انس | 忘记 |
+| Settings | settings | ajustos | reglages | configuracoes | einstellungen | impostazioni | настройки | إعدادات | 设置 |
+| Admins | admins | administradors | admins | admins | administratoren | amministratori | админы | مشرفون | 管理员 |
+| Block | block | blocar | bloquer | bloquear | sperren | blocca | запретить | حظر | 屏蔽 |
+| Unblock | unblock | permetre | debloquer | desbloquear | entsperren | sblocca | разрешить | إلغاء | 取消屏蔽 |
+| Blocked list | blocked | vetats | bloques | bloqueados | gesperrt | bloccati | заблокированы | محظورون | 已屏蔽 |
+| Maintenance | maintenance | manteniment | maintenance | manutencao | wartung | manutenzione | обслуживание | صيانة | 维护 |
+| Join this group | here | aci | ici | aqui | hier | qui | здесь | هنا | 这里 |
+| Leave | leave | fora | quitter | sair | verlassen | esci | выйти | خروج | 离开 |
+| Personality | personality | personalitat | personnalite | personalidade | persoenlichkeit | personalita | личность | شخصية | 个性 |
+| AI model | ai | ia | ia | ia | ki | ia | ии | ذكاء | 人工智能 |
+| Chess | chess | escacs | echecs | xadrez | schach | scacchi | шахматы | شطرنج | 国际象棋 |
+| Analyse | analyze | analitza | analyse | analisa | analysiere | analizza | анализ | تحليل | 分析 |
+| Help | help | ajuda | aide | ajuda | hilfe | aiuto | помощь | مساعدة | 帮助 |
+| Status | status | estat | statut | estado | zustand | stato | состояние | الحالة | 状态 |
+
+The source of truth is `src/commands.js`: the router keeps comparing canonical Spanish names and every alias is normalised (lowercase, accents removed) before it is looked up. Settings and maintenance mode also accept yes/no in the ten languages (`yes`, `si`, `ja`, `oui`, `sim`, `sì`, `да`, `نعم`, `是`).
+
 ## Look things up
 
 | Command | What it does |

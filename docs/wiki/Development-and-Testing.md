@@ -40,7 +40,7 @@ To see why the bot ignored a message, set `LOG_LEVEL=debug`: the router logs its
 
 ## Adding a command
 
-1. `src/commands.js`: add the alias to `ALIAS` (and variants in other languages when they make sense).
+1. `src/commands.js`: add the canonical key to `ALIAS` with at least one word per website language (es, en, ca, fr, pt, de, it, ru, ar, zh). The router only ever sees the canonical name.
 2. `src/router.js`: handle the case inside `handleCommand`, with the right permissions (`esAdmin`, `esDueno`, `esVetado`).
 3. `src/replies.js`: add the text; if it is a setting, go through `settings.js`.
 4. `src/i18n.js`: add the string to the 10 supported languages.

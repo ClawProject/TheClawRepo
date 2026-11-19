@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Claw per WhatsApp viene dismesso il 19 dicembre 2026.** Il codice resta qui, gratuito da scaricare, ma viene congelato: niente più aggiornamenti. Telegram, Claw App e Claw IDE continuano.
+
 # Installare Claw
 
 [English](INSTALL.md) · [Español](INSTALL.es.md) · [Català](INSTALL.ca.md) · [Français](INSTALL.fr.md) · [Português](INSTALL.pt.md) · [Deutsch](INSTALL.de.md) · **Italiano** · [Русский](INSTALL.ru.md) · [العربية](INSTALL.ar.md) · [中文](INSTALL.zh.md)

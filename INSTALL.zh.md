@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Claw for WhatsApp 将于 2026 年 12 月 19 日停止服务。** 代码仍可在此免费下载，但已冻结：不再有新更新。Telegram、Claw App 与 Claw IDE 继续。
+
 # 安装 Claw
 
 [English](INSTALL.md) · [Español](INSTALL.es.md) · [Català](INSTALL.ca.md) · [Français](INSTALL.fr.md) · [Português](INSTALL.pt.md) · [Deutsch](INSTALL.de.md) · [Italiano](INSTALL.it.md) · [Русский](INSTALL.ru.md) · [العربية](INSTALL.ar.md) · **中文**

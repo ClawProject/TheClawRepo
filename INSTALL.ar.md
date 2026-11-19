@@ -1,3 +1,6 @@
+> [!WARNING]
+> **سيتم إيقاف Claw لواتساب في 19 ديسمبر 2026.** يبقى الكود هنا مجانيًا للتنزيل، لكنه مجمّد: لا تحديثات جديدة. يستمر Telegram وClaw App وClaw IDE.
+
 # تثبيت Claw
 
 [English](INSTALL.md) · [Español](INSTALL.es.md) · [Català](INSTALL.ca.md) · [Français](INSTALL.fr.md) · [Português](INSTALL.pt.md) · [Deutsch](INSTALL.de.md) · [Italiano](INSTALL.it.md) · [Русский](INSTALL.ru.md) · **العربية** · [中文](INSTALL.zh.md)

@@ -24,6 +24,7 @@ import { resolverComando } from '../commands.js';
 import { contarPalabrotas } from '../swears.js';
 import { esPedidoDeImagen, parsearImagen, sniffMime, argsCli, generarImagen, pistaDeError } from '../imagegen.js';
 import { novedades, textoNovedades, hashNovedades, marcadorNovedades } from '../changelog.js';
+import { csvDeApuntes, COLUMNAS } from '../exports.js';
 import * as replies from '../replies.js';
 import { ping } from '../ollama.js';
 import { todayISO, addDays, longDate, weekdayOf, extractDatePhrase } from '../dates.js';
@@ -1976,6 +1977,52 @@ async function main() {
     'El reset devuelve a normal',
     /normal/.test(texto(resetP)) && config.clawPersonality === 'normal',
     `dice=${texto(resetP).slice(0, 80)}`
+  );
+
+  // ---- Exportar apuntes --------------------------------------------
+  console.log('\n\x1b[1m--- Exportar apuntes a CSV ---\x1b[0m');
+
+  const filaCsv = csvDeApuntes([
+    {
+      kind: 'examen',
+      subject: 'Historia',
+      content: 'Tema 4: "la Restauración"; repasar',
+      fecha: '2026-12-01',
+      fechaTexto: '1 de diciembre',
+      author: 'Ana',
+      createdAt: '2026-11-19 10:00',
+      updatedAt: '2026-11-19 10:00'
+    }
+  ]);
+  check(
+    'El CSV lleva BOM, cabecera y escapa comillas y punto y coma',
+    filaCsv.startsWith('\ufeff') &&
+      filaCsv.includes(COLUMNAS.join(';')) &&
+      filaCsv.includes('"Tema 4: ""la Restauración""; repasar"'),
+    filaCsv.split('\r\n')[1]
+  );
+
+  const expIntruso = await dice('!claw exportar', 'Bea');
+  check(
+    'Sin ser admin no se puede exportar',
+    /solo lo puede hacer el dueño/i.test(texto(expIntruso)),
+    `dice=${texto(expIntruso).slice(0, 80)}`
+  );
+
+  memory.upsertManual({ kind: 'deberes', subject: 'Lengua', content: 'Página 30, ejercicios 1-4', chatJid: JID });
+  const exp = await dice('!claw exportar', 'Dueno', { senderJid: duenoJid, fromMe: true });
+  const documento = (exp.media || []).find((m) => m.kind === 'document');
+  check(
+    'El dueño recibe el CSV como documento',
+    /apuntes/i.test(texto(exp)) && Boolean(documento) && /apuntes-.*\.csv$/.test(documento.filename || ''),
+    `dice=${texto(exp).slice(0, 90)}`
+  );
+  check(
+    'El archivo existe y lleva dentro el apunte',
+    Boolean(documento?.filePath) &&
+      fs.existsSync(documento.filePath) &&
+      fs.readFileSync(documento.filePath, 'utf8').includes('Página 30'),
+    `archivo=${documento?.filePath}`
   );
 
   // ---- Resumen -----------------------------------------------------

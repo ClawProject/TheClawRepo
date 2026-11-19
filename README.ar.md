@@ -1,3 +1,6 @@
+> [!WARNING]
+> **سيتم إيقاف Claw لواتساب في 19 ديسمبر 2026.** يبقى الكود هنا مجانيًا للتنزيل، لكنه مجمّد: لا تحديثات جديدة. يستمر Telegram وClaw App وClaw IDE.
+
 <p align="center">
   <img src="assets/logo.png" width="128" height="128" alt="Claw logo">
 </p>
@@ -310,6 +313,7 @@ WHATSAPP_GROUP_JID=your-group-id@g.us
 | `!claw imagen ...`           | يولّد صورة (تجريبي).                        |
 | `!claw ajedrez [حركة]`       | يلعب الشطرنج ضد Claw.                       |
 | `!claw personalidad`         | عرض شخصية Claw أو تغييرها.                  |
+| `!claw exportar` | تنزيل كل الملاحظات بصيغة CSV (للمشرفين). |
 | `!claw analiza [FEN]`        | يحلّل وضعًا في الشطرنج.                     |
 | `!claw novedades`            | يعرض آخر التغييرات.                         |
 

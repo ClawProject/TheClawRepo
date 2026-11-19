@@ -11,6 +11,10 @@ y el proyecto sigue [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Cambiado
 
+- **La versión de WhatsApp se congela el 19 de diciembre de 2026.** El código
+  sigue en el repositorio y se puede descargar, pero no habrá más actualizaciones
+  del bot de WhatsApp. Telegram, Claw App y Claw IDE siguen adelante. El aviso
+  está en los diez README y en la portada de la web.
 - **Sin túnel ngrok.** El servidor ya no lanza ngrok ni acepta dominios
   `*.ngrok`: la web se sirve en local y cualquier otro origen debe ir en
   `WEB_ALLOWED_ORIGINS`.
@@ -35,6 +39,11 @@ y el proyecto sigue [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Añadido
 
+- **Exportar los apuntes.** `!claw exportar` manda al chat un CSV con todos los
+  apuntes (deberes y exámenes) y lo deja en `data/exports/`; también se puede
+  sacar con `npm run exportar`, sin arrancar el bot. El CSV lleva BOM y punto y
+  coma para que Excel en español lo abra en columnas, y escapa comillas y saltos
+  de línea. Existe porque la versión de WhatsApp se congela.
 - **Personalidades de Claw.** `!claw personalidad` enseña cómo habla Claw y
   permite cambiarlo (solo admins): `normal` (amable y directo, como siempre),
   `profesor` (explica paso a paso), `gracioso` (de buen humor), `pirata`

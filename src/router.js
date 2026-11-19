@@ -25,6 +25,7 @@ import { transcribeFile } from './transcribe.js';
 import { clawAnswer, clawGreeting, PERSONALIDADES, personalidadActiva, personalidadValida } from './claw.js';
 import { buscarWeb } from './search.js';
 import { generarImagen, esPedidoDeImagen } from './imagegen.js';
+import { exportarApuntes } from './exports.js';
 import * as presence from './presence.js';
 import { textoNovedades } from './changelog.js';
 import * as ajedrez from './chess.js';
@@ -1198,6 +1199,38 @@ async function handleCommand({ comando, input, out, listModels }) {
     } catch (err) {
       log.warn(`No pude generar el calendario: ${err.message}`);
       out.replies = ['Ups, no he podido generar el .ics de los exámenes.'];
+    }
+    return out;
+  }
+
+  // --- Exportar los apuntes a un CSV ---
+  if (sub === 'exportar') {
+    out.action = 'comando-exportar';
+    if (!esAdmin) {
+      out.replies = [replies.noPermitido()];
+      return out;
+    }
+    const entradas = memory.listEntries(1000000, chatJid);
+    if (!entradas.length) {
+      out.replies = ['📄 No hay apuntes que exportar todavía.'];
+      return out;
+    }
+    try {
+      const r = exportarApuntes(entradas);
+      log.info(`Exportados ${r.count} apuntes a ${r.filePath}`);
+      out.replies = [
+        `📄 Aquí tienes tus *${r.count}* apuntes en CSV: se abre con Excel, Numbers o Google Sheets.\nQueda también guardado en el ordenador, en _data/exports/_.`
+      ];
+      out.media.push({
+        filePath: r.filePath,
+        mime: 'text/csv',
+        caption: r.filename,
+        kind: 'document',
+        filename: r.filename
+      });
+    } catch (err) {
+      log.warn(`No pude exportar los apuntes: ${err.message}`);
+      out.replies = ['Ups, no he podido exportar los apuntes. Mira el log para ver el motivo.'];
     }
     return out;
   }

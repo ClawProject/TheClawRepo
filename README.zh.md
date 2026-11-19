@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Claw for WhatsApp 将于 2026 年 12 月 19 日停止服务。** 代码仍可在此免费下载，但已冻结：不再有新更新。Telegram、Claw App 与 Claw IDE 继续。
+
 <p align="center">
   <img src="assets/logo.png" width="128" height="128" alt="Claw logo">
 </p>
@@ -310,6 +313,7 @@ Claw 通过内部标识识别群组，而不是群名。
 | `!claw imagen ...`           | 生成图片（实验性）。               |
 | `!claw ajedrez [走法]`       | 与 Claw 下国际象棋。               |
 | `!claw personalidad`       | 查看或更改 Claw 的个性。             |
+| `!claw exportar` | 下载全部笔记为 CSV（管理员）。 |
 | `!claw analiza [FEN]`        | 分析棋局局面。                     |
 | `!claw novedades`            | 显示最近的变更。                   |
 

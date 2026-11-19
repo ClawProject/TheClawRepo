@@ -77,6 +77,17 @@ The source of truth is `src/commands.js`: the router keeps comparing canonical S
 | `!claw ia qwen2.5:3b` | Switch model without restarting (admins) |
 | `!claw ia fallback` / `!claw ia principal` | Back to the fallback or the primary model |
 
+## Exporting your notes
+
+The WhatsApp version is frozen on December 19, 2026, so the notes can be taken out at any time, in two ways:
+
+| Command | What it does |
+| --- | --- |
+| `!claw exportar` | Sends a CSV with every homework and exam note to the chat and saves it in `data/exports/` (admins) |
+| `npm run exportar` | Writes `data/exports/apuntes-YYYY-MM-DD.csv` without starting the bot |
+
+The CSV starts with a BOM and uses `;` as separator, so Excel in Spanish opens it in columns; it also works in Numbers and Google Sheets. Quotes, semicolons and line breaks are escaped. Columns: `tipo`, `asignatura`, `contenido`, `fecha`, `fecha_texto`, `autor`, `creado`, `actualizado`.
+
 ## Chess
 
 | Command | What it does |

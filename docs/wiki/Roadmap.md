@@ -2,6 +2,10 @@
 
 Status taken from the project website ([`pagina-web/index.html`](https://github.com/ClawProject/TheClawRepo/blob/main/pagina-web/index.html), “Roadmap” section).
 
+## The WhatsApp version is frozen
+
+On **December 19, 2026** the WhatsApp bot stops being updated. The code stays in the repository, free to download, but it is frozen: no new features and no fixes. The notes can be exported before then (`!claw exportar` or `npm run exportar`). Telegram, Claw App and Claw IDE continue.
+
 ## In progress
 
 | Goal | What it covers |

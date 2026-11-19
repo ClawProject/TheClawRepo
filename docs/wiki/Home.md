@@ -1,5 +1,8 @@
 # Claw wiki
 
+> [!WARNING]
+> **Claw for WhatsApp is being discontinued on December 19, 2026.** The code stays here, free to download, but it is frozen: no new updates. Telegram, Claw App and Claw IDE continue. You can take your notes with you first: see [Commands](Commands#exporting-your-notes).
+
 **Claw** is a self-hosted WhatsApp assistant powered by local AI, built for a class group. It keeps track of homework and exams from the conversation itself, understands voice notes and photos, and answers when someone asks. All processing happens on the computer hosting it.
 
 PickleBrain is the process running on that computer (Node.js); Claw is the assistant people talk to, from WhatsApp or from the local web interface.

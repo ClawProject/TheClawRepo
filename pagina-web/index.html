@@ -92,6 +92,16 @@
       100% { transform: translate3d(2%, 2%, 0) scale(1.06); }
     }
 
+    /* ---------- aviso de descontinuación ---------- */
+    .deprecation {
+      display: flex; align-items: center; justify-content: center; gap: .55rem;
+      padding: .6rem 1rem; background: #402c06; color: #ffe2b0;
+      border-bottom: 1px solid #7a5510; font-size: .84rem; line-height: 1.45;
+      text-align: center; text-decoration: none;
+    }
+    .deprecation:hover { background: #4a3308; color: #fff0cf; }
+    .deprecation .dep-em { font-size: 1rem; line-height: 1; }
+
     /* ---------- header ---------- */
     .site-header {
       position: sticky; top: 0; z-index: 50;
@@ -946,6 +956,11 @@
   <a class="skip" href="#main" data-i18n="skip">Ir al contenido</a>
   <div class="fx" aria-hidden="true"></div>
 
+  <a class="deprecation" href="https://github.com/ClawProject/TheClawRepo#readme" target="_blank" rel="noopener">
+    <span class="dep-em" aria-hidden="true">⚠️</span>
+    <span data-i18n="depD">El 19 de diciembre de 2026 cierra el bot de WhatsApp: el código sigue gratis para descargar, pero queda congelado, sin actualizaciones. Telegram, Claw App y Claw IDE siguen adelante.</span>
+  </a>
+
   <header class="site-header scrolled" id="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="#top" aria-label="Claw">
@@ -1524,6 +1539,16 @@
         nDocs: 'Docs',
         eEyebrow: 'Self-hosted WhatsApp bot · Local AI',
         eTitle: "Your class group's memory,<br><em>on your own computer.</em>",
+        depD: "On December 19, 2026 the WhatsApp bot shuts down: the code stays free to download but frozen, with no new updates. Telegram, Claw App and Claw IDE continue.",
+        depD: "El 19 de diciembre de 2026 cierra el bot de WhatsApp: el código sigue gratis para descargar, pero queda congelado, sin actualizaciones. Telegram, Claw App y Claw IDE siguen adelante.",
+        depD: "El 19 de desembre de 2026 tanca el bot de WhatsApp: el codi segueix gratis per descarregar, però queda congelat, sense actualitzacions. Telegram, Claw App i Claw IDE segueixen.",
+        depD: "Le 19 décembre 2026, le bot WhatsApp s'arrête : le code reste gratuit à télécharger mais gelé, sans nouvelles mises à jour. Telegram, Claw App et Claw IDE continuent.",
+        depD: "A 19 de dezembro de 2026 o bot de WhatsApp fecha: o código continua grátis para descarregar mas congelado, sem atualizações. O Telegram, a Claw App e o Claw IDE continuam.",
+        depD: "Am 19. Dezember 2026 wird der WhatsApp-Bot eingestellt: Der Code bleibt kostenlos herunterladbar, aber eingefroren, ohne Updates. Telegram, Claw App und Claw IDE laufen weiter.",
+        depD: "Il 19 dicembre 2026 il bot di WhatsApp chiude: il codice resta gratuito da scaricare ma congelato, senza nuovi aggiornamenti. Telegram, Claw App e Claw IDE continuano.",
+        depD: "19 декабря 2026 года бот для WhatsApp закрывается: код остаётся бесплатным для скачивания, но заморожен, без обновлений. Telegram, Claw App и Claw IDE продолжают работать.",
+        depD: "في 19 ديسمبر 2026 يتوقف بوت واتساب: الكود يبقى مجانيًا للتنزيل لكنه مجمّد، بلا تحديثات. يستمر Telegram وClaw App وClaw IDE.",
+        depD: "2026 年 12 月 19 日 WhatsApp 机器人停止服务：代码仍可免费下载，但已冻结，不再更新。Telegram、Claw App 与 Claw IDE 继续。",
         eLead: 'Claw lives inside a school WhatsApp group. It picks up homework and exam announcements, keeps them in a local database and answers when someone asks — <strong>quietly, privately and without sending a single message to a cloud AI.</strong>',
         eCta1: 'View the repository',
         eCta2: 'Install in five minutes',

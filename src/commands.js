@@ -65,6 +65,7 @@ const ALIAS = {
   imagen: ['image', 'imatge', 'imagem', 'bild', 'immagine', 'изображение', 'صورة', '图片', 'dibujo', 'dibuja'],
   ajedrez: ['chess', 'escacs', 'echecs', 'échecs', 'xadrez', 'schach', 'scacchi', 'шахматы', 'شطرنج', '国际象棋'],
   analiza: ['analyze', 'analyse', 'analitza', 'analisa', 'analysiere', 'analizza', 'анализ', 'تحليل', '分析'],
+  exportar: ['export', 'exporta', 'exporte', 'exporter', 'exportieren', 'esporta', 'экспорт', 'تصدير', '导出'],
   personalidad: [
     'personality', 'personalitat', 'personnalite', 'personnalité', 'personalidade',
     'persoenlichkeit', 'persönlichkeit', 'personlichkeit', 'personalita', 'личность',

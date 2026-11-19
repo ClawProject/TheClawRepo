@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Claw pour WhatsApp est abandonné le 19 décembre 2026.** Le code reste ici, gratuit à télécharger, mais il est gelé : plus de mises à jour. Telegram, Claw App et Claw IDE continuent.
+
 <p align="center">
   <img src="assets/logo.png" width="128" height="128" alt="Claw logo">
 </p>
@@ -310,6 +313,7 @@ Toutes les commandes commencent par `!claw`. L'ancien alias `!pickle` est aussi 
 | `!claw imagen ...`           | Génère une image (expérimental).         |
 | `!claw ajedrez [coup]`       | Joue aux échecs contre Claw.             |
 | `!claw personalidad`         | Voir ou changer la personnalité de Claw. |
+| `!claw exportar` | Télécharger tous les cours en CSV (admins). |
 | `!claw analiza [FEN]`        | Analyse une position d'échecs.           |
 | `!claw novedades`            | Affiche les changements récents.         |
 

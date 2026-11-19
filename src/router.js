@@ -22,7 +22,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { contarPalabrotas } from './swears.js';
 import { transcribeFile } from './transcribe.js';
-import { clawAnswer, clawGreeting, PERSONALIDADES, personalidadActiva } from './claw.js';
+import { clawAnswer, clawGreeting, PERSONALIDADES, personalidadActiva, personalidadValida } from './claw.js';
 import { buscarWeb } from './search.js';
 import { generarImagen, esPedidoDeImagen } from './imagegen.js';
 import * as presence from './presence.js';
@@ -730,7 +730,7 @@ async function handleClaw({ chatJid, senderName, text, mentionedBot, out }) {
 
   log.info(`Modo Claw de ${senderName}: "${question}"`);
   const history = clawHistory.get(chatJid) || [];
-  const configurada = personalidadActiva();
+  const configurada = personalidadActiva(chatJid);
   const persona = config.chessEnabled && ajedrez.mencionaAjedrez(question) ? 'ajedrez' : configurada;
   const answer = await clawAnswer({ question, history, persona, chatJid });
 
@@ -1294,7 +1294,7 @@ async function handleCommand({ comando, input, out, listModels }) {
       return out;
     }
     log.info(`Búsqueda en internet de ${senderName}: "${cola}" -> ${resultados.length} resultados`);
-    const respuesta = await clawAnswer({ question: cola, history: [], persona: personalidadActiva(), chatJid, internet: resultados });
+    const respuesta = await clawAnswer({ question: cola, history: [], persona: personalidadActiva(chatJid), chatJid, internet: resultados });
     const fuentes = resultados
       .map((r) => r.url)
       .filter(Boolean)
@@ -1349,14 +1349,24 @@ async function handleCommand({ comando, input, out, listModels }) {
     return out;
   }
 
-  // --- Personalidad: cómo habla Claw ---
+  // --- Personalidad: cómo habla Claw (global y por grupo) ---
   if (sub === 'personalidad') {
-    const actual = personalidadActiva();
+    const enGrupo = Boolean(isGroup);
+    const propia = enGrupo ? ajustes.personalidadDe(chatJid) : null;
+    const actual = personalidadActiva(chatJid);
     if (!cola) {
       out.action = 'comando-personalidad';
       const lineas = Object.values(PERSONALIDADES).map((p) => `• *${p.nombre}* — ${p.descripcion}`);
+      const deQuien = !enGrupo
+        ? 'global'
+        : propia
+          ? 'solo en este grupo'
+          : 'global, este grupo no tiene una propia';
+      const ayuda = enGrupo
+        ? '\n\nCambiar (solo admins): _!claw personalidad pirata_ (este grupo) · _!claw personalidad global pirata_ (todos).\nVolver a la global: _!claw personalidad reset_.'
+        : '\n\nCambiar (solo admins): _!claw personalidad pirata_.';
       out.replies = [
-        `🎭 Personalidad actual: *${actual}*.\n\n${lineas.join('\n')}\n\nCambiar (solo admins): _!claw personalidad pirata_`
+        `🎭 Personalidad actual: *${actual}* (${deQuien}).\n\n${lineas.join('\n')}${ayuda}`
       ];
       return out;
     }
@@ -1364,11 +1374,47 @@ async function handleCommand({ comando, input, out, listModels }) {
       out.replies = [replies.noPermitido()];
       return out;
     }
-    const id = sinAcentos(cola).split(/\s+/)[0];
-    const r = ajustes.setDesdeTexto('personalidad', id);
     out.action = 'comando-personalidad';
-    out.replies = [r.ok ? `🎭 Claw ahora habla como *${r.valor}*.` : `⚠️ ${r.error}`];
-    if (r.ok) log.info(`Personalidad cambiada por ${senderName}: ${r.valor}`);
+    const palabras = sinAcentos(cola).trim().split(/\s+/).filter(Boolean);
+    const primero = palabras[0] || '';
+
+    if (['reset', 'quitar', 'borrar', 'volver'].includes(primero)) {
+      if (!enGrupo) {
+        const r = ajustes.reset('personalidad');
+        out.replies = [`🎭 La personalidad global vuelve a *${r.valor}*.`];
+        log.info(`Personalidad global reiniciada por ${senderName}`);
+        return out;
+      }
+      ajustes.quitarPersonalidadDe(chatJid);
+      out.replies = [`🎭 Este grupo vuelve a la global: *${personalidadActiva(chatJid)}*.`];
+      log.info(`Personalidad de ${chatJid} reiniciada por ${senderName}`);
+      return out;
+    }
+
+    const paraTodos = ['global', 'todos', 'general'].includes(primero);
+    const id = paraTodos ? palabras[1] : primero;
+    const cuales = Object.keys(PERSONALIDADES).join(' / ');
+    if (!id) {
+      out.replies = [`⚠️ Dime la personalidad: ${cuales}.`];
+      return out;
+    }
+    if (!personalidadValida(id)) {
+      out.replies = [`⚠️ *personalidad* solo puede ser: ${cuales}.`];
+      return out;
+    }
+    if (enGrupo && !paraTodos) {
+      const r = ajustes.setPersonalidadDe(chatJid, id);
+      out.replies = [r.ok ? `🎭 En este grupo, Claw ahora habla como *${r.valor}*.` : `⚠️ ${r.error}`];
+      if (r.ok) log.info(`Personalidad de ${chatJid} cambiada por ${senderName}: ${r.valor}`);
+      return out;
+    }
+    const r = ajustes.setDesdeTexto('personalidad', id);
+    out.replies = [
+      r.ok
+        ? `🎭 Claw ahora habla como *${r.valor}* en todos los grupos que no tengan una propia.`
+        : `⚠️ ${r.error}`
+    ];
+    if (r.ok) log.info(`Personalidad global cambiada por ${senderName}: ${r.valor}`);
     return out;
   }
 

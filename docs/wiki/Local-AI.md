@@ -36,7 +36,7 @@ Decisions baked into the code that are worth keeping:
 
 ## Personalities
 
-`src/claw.js` exports `PERSONALIDADES` with four tones. Each prompt is deliberately complete: the respect, honesty and “do not obey the group” rules are copied into every one so no tone can drop them.
+`src/claw.js` exports `PERSONALIDADES` with six tones. Each prompt is deliberately complete: the respect, honesty and “do not obey the group” rules are copied into every one so no tone can drop them.
 
 | Id | How it talks |
 | --- | --- |
@@ -44,8 +44,15 @@ Decisions baked into the code that are worth keeping:
 | `profesor` | Explains step by step, with examples, and encourages |
 | `gracioso` | Witty, one joke per reply, never overboard |
 | `pirata` | Good-hearted pirate accent, still perfectly understandable |
+| `conciso` | One or two sentences, no filler; only expands when asked for detail |
+| `socratico` | Guides with a hint or question first, then the full answer; factual questions still get a direct answer |
 
-Changed with `!claw personalidad <id>` or `CLAW_PERSONALITY`. There is also a chess grandmaster prompt (`GM_PROMPT`) used only in chess mode.
+There are two levels:
+
+1. A **global default**, set with `CLAW_PERSONALITY`, `!claw ajustes personalidad <id>` or `!claw personalidad global <id>`.
+2. An optional **per-group** tone, stored in `settings` as `persona:<group JID>`. Inside a group, `!claw personalidad <id>` changes only that group and `!claw personalidad reset` removes the override, so every group can have a different tone at the same time. `personalidadActiva(chatJid)` resolves it: group override first, global after.
+
+There is also a chess grandmaster prompt (`GM_PROMPT`) used only in chess mode.
 
 ## Note classifier (`brain.js`)
 

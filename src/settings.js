@@ -77,9 +77,9 @@ export const CATALOGO = {
   resumen_hora: { etiqueta: 'hora del resumen (0-23)', tipo: 'num', min: 0, max: 23 },
   ajedrez: { etiqueta: 'modo ajedrez (jugar y analizar partidas)', tipo: 'bool' },
   personalidad: {
-    etiqueta: 'cómo habla Claw: normal | profesor | gracioso | pirata',
+    etiqueta: 'cómo habla Claw: normal | profesor | gracioso | pirata | conciso | socratico',
     tipo: 'opciones',
-    opciones: ['normal', 'profesor', 'gracioso', 'pirata']
+    opciones: ['normal', 'profesor', 'gracioso', 'pirata', 'conciso', 'socratico']
   },
   mantenimiento: { etiqueta: 'modo mantenimiento: el bot se queda callado', tipo: 'bool' },
   buscar: { etiqueta: 'buscar en internet (DuckDuckGo) cuando haga falta', tipo: 'bool' },
@@ -103,6 +103,50 @@ export const CATALOGO = {
   admins: { etiqueta: 'administradores de Claw', tipo: 'lista' },
   vetados: { etiqueta: 'personas vetadas: no pueden usar a Claw', tipo: 'lista' }
 };
+
+// ------------------------------------------------- personalidad por grupo
+//
+// El ajuste `personalidad` es global (sale del .env o de !claw ajustes). Encima
+// de eso, cada grupo puede tener la suya: se guarda aparte, con el JID del grupo
+// en la clave, así un grupo no cambia cómo habla Claw en los demás.
+
+const PERSONA_PREFIJO = 'persona:';
+
+/** Personalidad propia de un grupo, o null si usa la global. */
+export function personalidadDe(chatJid) {
+  if (!chatJid) return null;
+  const guardado = memory.getSetting(PERSONA_PREFIJO + chatJid);
+  if (guardado === null || guardado === undefined) return null;
+  let valor = guardado;
+  try {
+    valor = JSON.parse(guardado);
+  } catch {
+    /* guardado como texto suelto */
+  }
+  const id = normalizaOpcion(valor);
+  return (CATALOGO.personalidad.opciones || []).includes(id) ? id : null;
+}
+
+/** Fija la personalidad de un grupo concreto. */
+export function setPersonalidadDe(chatJid, id) {
+  if (!chatJid) return { ok: false, error: 'Necesito saber en qué grupo estoy.' };
+  const v = normalizaOpcion(id);
+  if (!(CATALOGO.personalidad.opciones || []).includes(v)) {
+    return {
+      ok: false,
+      error: `*personalidad* solo puede ser: ${CATALOGO.personalidad.opciones.join(' / ')}.`
+    };
+  }
+  memory.setSetting(PERSONA_PREFIJO + chatJid, JSON.stringify(v));
+  return { ok: true, valor: v };
+}
+
+/** Quita la personalidad propia del grupo: vuelve a la global. */
+export function quitarPersonalidadDe(chatJid) {
+  if (!chatJid) return { ok: false, error: 'Necesito saber en qué grupo estoy.' };
+  memory.setSetting(PERSONA_PREFIJO + chatJid, null);
+  return { ok: true };
+}
 
 /** Valor de fábrica de un ajuste (el del .env). */
 export function defecto(clave) {

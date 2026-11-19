@@ -6,7 +6,6 @@ Status taken from the project website ([`pagina-web/index.html`](https://github.
 
 | Goal | What it covers |
 | --- | --- |
-| **Personalities** | Let each group choose how Claw talks: tones and ways of answering. A first version already exists (`normal`, `profesor`, `gracioso`, `pirata`) and is changed with `!claw personalidad`; per-group support and more options are still missing |
 | **Claw on Telegram** | The same assistant in Telegram groups too, not just WhatsApp |
 | **Claw IDE** | An editor for writing code with Claw next to it: the project and the assistant in the same window |
 
@@ -19,7 +18,7 @@ Status taken from the project website ([`pagina-web/index.html`](https://github.
 
 ## Code versus roadmap
 
-- **Personalities**: implemented as a global tone (`CLAW_PERSONALITY` and the `personalidad` setting), with a complete prompt per tone so none can skip the rules. The chess prompt is separate.
+- **Personalities**: six tones (`normal`, `profesor`, `gracioso`, `pirata`, `conciso`, `socratico`), each with a complete prompt so none can skip the rules. The global default comes from `CLAW_PERSONALITY` or the `personalidad` setting and each group can override it with `!claw personalidad <id>` (`persona:<JID>` in `settings`); `!claw personalidad reset` goes back. The chess prompt is separate.
 - **Telegram**: there is no adapter in this repository. All transport lives in `whatsapp.js` with Baileys; the router and storage are already channel-agnostic, so the pending work is the connection layer.
 - **Claw IDE**: no code yet.
 - **Claw App**: the Android app exists as a separate client outside this repository; the desktop one has not started.

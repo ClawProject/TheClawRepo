@@ -69,8 +69,10 @@ The source of truth is `src/commands.js`: the router keeps comparing canonical S
 | Command | What it does |
 | --- | --- |
 | `Claw <question>` | General conversation with the local AI |
-| `!claw personalidad` | Show the available personalities |
-| `!claw personalidad profesor` | Change how it talks: `normal`, `profesor`, `gracioso`, `pirata` (admins) |
+| `!claw personalidad` | Show the current personality (and whether it comes from the group) and the available ones |
+| `!claw personalidad profesor` | Change how it talks in this group: `normal`, `profesor`, `gracioso`, `pirata`, `conciso`, `socratico` (admins) |
+| `!claw personalidad global profesor` | Change the default for every group without one of its own (admins) |
+| `!claw personalidad reset` | Drop this group's personality and go back to the global one (admins) |
 | `!claw ia` | Show the Ollama model in use and the installed ones |
 | `!claw ia qwen2.5:3b` | Switch model without restarting (admins) |
 | `!claw ia fallback` / `!claw ia principal` | Back to the fallback or the primary model |

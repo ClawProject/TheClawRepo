@@ -268,7 +268,8 @@ export const config = {
   // --- Claw ---
   clawTrigger: (process.env.CLAW_TRIGGER || 'claw').trim(),
   clawMaxPerMinute: num(process.env.CLAW_MAX_PER_MINUTE, 6),
-  // Cómo habla Claw: normal | profesor | gracioso | pirata.
+  // Cómo habla Claw: normal | profesor | gracioso | pirata | conciso | socratico.
+  // Es el valor global: cada grupo puede tener el suyo (ver settings.js).
   clawPersonality: (process.env.CLAW_PERSONALITY || 'normal').trim().toLowerCase(),
   // Marcar las respuestas del asistente con una cabecera "🪝 Claw" para poder
   // distinguirlas de un vistazo de los avisos de deberes/exámenes.

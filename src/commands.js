@@ -66,8 +66,9 @@ const ALIAS = {
   ajedrez: ['chess', 'escacs', 'echecs', 'échecs', 'xadrez', 'schach', 'scacchi', 'шахматы', 'شطرنج', '国际象棋'],
   analiza: ['analyze', 'analyse', 'analitza', 'analisa', 'analysiere', 'analizza', 'анализ', 'تحليل', '分析'],
   personalidad: [
-    'personality', 'personalitat', 'personnalite', 'personalidade', 'persoenlichkeit',
-    'personalita', 'личность', 'شخصية', '个性'
+    'personality', 'personalitat', 'personnalite', 'personnalité', 'personalidade',
+    'persoenlichkeit', 'persönlichkeit', 'personlichkeit', 'personalita', 'личность',
+    'شخصية', '个性'
   ]
 };
 

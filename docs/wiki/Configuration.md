@@ -36,7 +36,7 @@ There are two layers: what goes in `.env` (factory values) and the settings chan
 | `CONTEXT_MESSAGES` | `6` | Recent messages passed to Claw |
 | `CLAW_TRIGGER` | `claw` | Word that activates the assistant |
 | `CLAW_MAX_PER_MINUTE` | `6` | Claw messages per minute per person |
-| `CLAW_PERSONALITY` | `normal` | `normal`, `profesor`, `gracioso`, `pirata` |
+| `CLAW_PERSONALITY` | `normal` | Global default tone: `normal`, `profesor`, `gracioso`, `pirata`, `conciso`, `socratico` (groups can override it) |
 | `CLAW_SIGNATURE` | `true` | “🪝 Claw” header on replies |
 | `MIN_SECONDS_BETWEEN_REPLIES` | `30` | Minimum gap between replies |
 | `ACK_SAVES` | `false` | Announce in the group when something is stored |
@@ -121,7 +121,7 @@ They live in the `settings` table under the `cfg:` prefix and are applied to `co
 | `recordatorios`, `hora_aviso`, `hora_manana` | `reminderEnabled`, `reminderHour`, `reminderMorningHour` | yes/no and hour |
 | `resumen`, `resumen_dia`, `resumen_hora` | `summaryEnabled`, `summaryDay`, `summaryHour` | yes/no and numbers |
 | `ajedrez` | `chessEnabled` | yes/no |
-| `personalidad` | `clawPersonality` | `normal` / `profesor` / `gracioso` / `pirata` |
+| `personalidad` | `clawPersonality` | `normal` / `profesor` / `gracioso` / `pirata` / `conciso` / `socratico` |
 | `mantenimiento` | `maintenance` | yes/no |
 | `buscar` | `webSearchEnabled` | yes/no |
 | `apunta` | `apuntaLibre` | yes/no |
@@ -132,6 +132,8 @@ They live in the `settings` table under the `cfg:` prefix and are applied to `co
 | `admins`, `vetados` | JID lists | list |
 
 Usage: `!claw ajustes`, `!claw ajustes ventana 30`, `!claw ajustes personalidad pirata`. Settings are visible and editable **in private only**, and only by the owner.
+
+`personalidad` is the global tone. A group can have its own without touching the others: inside the group, `!claw personalidad <id>` stores `persona:<group JID>` in `settings`, `!claw personalidad global <id>` changes the default and `!claw personalidad reset` removes the group override.
 
 ## What is and is not in `.env.example`
 

@@ -19,7 +19,7 @@ import { recordarAlias } from '../identities.js';
 import { sendReplies, estaConectado, cuandoConecte } from '../whatsapp.js';
 import { liberarVram } from '../ollama.js';
 import { necesitaBuscar, parsearResultadosDDG } from '../search.js';
-import { conFuenteWeb, PERSONALIDADES } from '../claw.js';
+import { conFuenteWeb, PERSONALIDADES, personalidadActiva } from '../claw.js';
 import { resolverComando } from '../commands.js';
 import { contarPalabrotas } from '../swears.js';
 import { esPedidoDeImagen, parsearImagen, sniffMime, argsCli, generarImagen, pistaDeError } from '../imagegen.js';
@@ -1888,10 +1888,15 @@ async function main() {
   console.log('\n\x1b[1m--- Personalidades: cómo habla Claw ---\x1b[0m');
 
   check(
-    'Hay 4 personalidades con nombre y descripción',
-    Object.keys(PERSONALIDADES).length === 4 &&
+    'Hay 6 personalidades con nombre y descripción',
+    Object.keys(PERSONALIDADES).length === 6 &&
       Object.values(PERSONALIDADES).every((p) => p.nombre && p.descripcion && p.prompt),
     Object.keys(PERSONALIDADES).join(',')
+  );
+  check(
+    'Cada personalidad tiene su propio prompt (no se repiten)',
+    new Set(Object.values(PERSONALIDADES).map((p) => p.prompt)).size === Object.keys(PERSONALIDADES).length,
+    'revisar los prompts de src/claw.js'
   );
   check(
     'Todas mantienen la regla de respeto y se presentan como Claw',
@@ -1921,15 +1926,41 @@ async function main() {
   );
   const cambio = await dice('!claw personalidad pirata', 'Dueno', { senderJid: duenoJid, fromMe: true });
   check(
-    'El dueño cambia a pirata',
-    /ahora habla como \*pirata\*/i.test(texto(cambio)) && config.clawPersonality === 'pirata',
-    `dice=${texto(cambio).slice(0, 80)}`
+    'En un grupo, el dueño cambia a pirata solo en ese grupo',
+    /En este grupo, Claw ahora habla como \*pirata\*/i.test(texto(cambio)) &&
+      ajustes.personalidadDe(JID) === 'pirata' &&
+      config.clawPersonality === 'normal',
+    `dice=${texto(cambio).slice(0, 80)} grupo=${ajustes.personalidadDe(JID)} global=${config.clawPersonality}`
+  );
+  check(
+    'La personalidad del grupo no se aplica a otros grupos',
+    personalidadActiva(JID) === 'pirata' && personalidadActiva('otros-familia@g.us') === 'normal',
+    `aqui=${personalidadActiva(JID)} otro=${personalidadActiva('otros-familia@g.us')}`
   );
   const mala = await dice('!claw personalidad ninja', 'Dueno', { senderJid: duenoJid, fromMe: true });
   check(
     'Un nombre inventado se rechaza con la lista y no cambia nada',
-    /solo puede ser/i.test(texto(mala)) && config.clawPersonality === 'pirata',
+    /solo puede ser/i.test(texto(mala)) && ajustes.personalidadDe(JID) === 'pirata',
     `dice=${texto(mala).slice(0, 80)}`
+  );
+  const globalP = await dice('!claw personalidad global profesor', 'Dueno', {
+    senderJid: duenoJid,
+    fromMe: true
+  });
+  check(
+    '"!claw personalidad global profesor" cambia la de todos',
+    /en todos los grupos/i.test(texto(globalP)) &&
+      config.clawPersonality === 'profesor' &&
+      ajustes.personalidadDe(JID) === 'pirata',
+    `dice=${texto(globalP).slice(0, 90)} global=${config.clawPersonality}`
+  );
+  const resetGrupo = await dice('!claw personalidad reset', 'Dueno', { senderJid: duenoJid, fromMe: true });
+  check(
+    '"!claw personalidad reset" devuelve el grupo a la global',
+    /vuelve a la global: \*profesor\*/i.test(texto(resetGrupo)) &&
+      ajustes.personalidadDe(JID) === null &&
+      personalidadActiva(JID) === 'profesor',
+    `dice=${texto(resetGrupo).slice(0, 90)}`
   );
   const viaAjustes = await dice('!claw ajustes personalidad gracioso', 'Dueno', {
     senderJid: duenoJid,

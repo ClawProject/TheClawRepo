@@ -8,7 +8,7 @@ Status taken from the project website ([`pagina-web/index.html`](https://github.
 | --- | --- |
 | **Personalities** | Let each group choose how Claw talks: tones and ways of answering. A first version already exists (`normal`, `profesor`, `gracioso`, `pirata`) and is changed with `!claw personalidad`; per-group support and more options are still missing |
 | **Claw on Telegram** | The same assistant in Telegram groups too, not just WhatsApp |
-| **Claw IDE** | A dedicated place to work with Claw: the assistant and your notes in the same spot |
+| **Claw IDE** | An editor for writing code with Claw next to it: the project and the assistant in the same window |
 
 ## Next
 

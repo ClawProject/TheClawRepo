@@ -8,6 +8,9 @@
   <meta property="og:title" content="Claw — your class group's memory, on your own machine">
   <meta property="og:description" content="A self-hosted WhatsApp bot powered by local AI. It tracks homework and exams, understands voice notes and answers only when asked.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary">
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +29,7 @@
       --surface-2: rgba(255, 255, 255, .062);
       --ink: #f4f6fb;
       --muted: #9aa3b5;
-      --muted-2: #6f7789;
+      --muted-2: #7c8496;
       --brand: #2f6bff;
       --brand-soft: #a9c6ff;
       --brand-hover: #1f5fe8;
@@ -60,6 +63,7 @@
     code, kbd, pre { font-family: var(--font-mono); }
     ::selection { background: var(--brand); color: #ffffff; }
     :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 6px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
     .wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: 24px; }
     .skip {
       position: absolute; left: 16px; top: -60px; z-index: 100;
@@ -164,8 +168,7 @@
       border: 1px solid var(--line-strong); background: var(--surface);
       font-size: .78rem; font-weight: 500; letter-spacing: .01em; color: var(--muted);
     }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 4px rgba(47, 107, 255, .16); animation: pulse 3s ease-in-out infinite; }
-    @keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(47, 107, 255, .06); } }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 4px rgba(47, 107, 255, .16); }
     .hero h1 {
       margin: 22px 0 0;
       font-size: clamp(2.35rem, 5.1vw, 4.05rem);
@@ -189,13 +192,12 @@
 
     /* chat mock */
     .chat {
-      position: relative; border-radius: 26px; border: 1px solid var(--line);
+      position: relative; border-radius: var(--m3-xl); border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .012));
       box-shadow: var(--shadow); overflow: hidden;
-      transform: rotate(.6deg);
-      transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+      transition: transform .18s ease;
     }
-    .chat:hover { transform: rotate(0deg) translateY(-4px); }
+    .chat:hover { transform: translateY(-2px); }
     .chat::before {
       content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
       background: radial-gradient(24rem 14rem at 85% -10%, rgba(47, 107, 255, .13), transparent 70%);
@@ -514,13 +516,13 @@
       padding: 10px 32px 10px 12px; border-radius: 11px;
       border: 1px solid var(--line-strong); background-color: var(--surface);
       color: var(--ink); font-size: .84rem; font-weight: 500; cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa498' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c8496' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: right 10px center; background-size: 13px;
       transition: background-color .2s ease, border-color .2s ease;
     }
     [dir="rtl"] .lang { padding: 10px 12px 10px 32px; background-position: left 10px center; }
     .lang:hover { background-color: var(--surface-2); }
-    .lang option { background: #0d100d; color: var(--ink); }
+    .lang option { background: #0b0f16; color: var(--ink); }
 
     .flow {
       border: 1px solid var(--line); border-radius: var(--radius);
@@ -568,10 +570,10 @@
       --lg-stroke-strong: rgba(255, 255, 255, .30);
       --lg-highlight: rgba(255, 255, 255, .48);
       --lg-blur: 26px;
-      --lg-glass: linear-gradient(168deg, rgba(255, 255, 255, .115), rgba(255, 255, 255, .045) 52%, rgba(255, 255, 255, .02));
-      --m3-xl: 34px;
-      --m3-lg: 26px;
-      --m3-md: 18px;
+      --lg-glass: rgba(255, 255, 255, .045);
+      --m3-xl: 20px;
+      --m3-lg: 20px;
+      --m3-md: 12px;
       --m3-full: 999px;
       --m3-spring: cubic-bezier(.2, 1.12, .22, 1);
       --radius: var(--m3-lg);
@@ -582,7 +584,7 @@
       --brand: #4d6ef2;
       --brand-hover: #3f5ee0;
       --brand-soft: #c3d3ff;
-      --accent: #8fe3dd;
+      --accent: #a9c6ff;
     }
 
     body { background: #05060a; }
@@ -601,7 +603,7 @@
     /* ---------------- cabecera: barra flotante de vidrio ---------------- */
     .site-header {
       top: 10px; margin: 10px auto 0;
-      width: min(100% - 24px, 1220px);
+      width: min(calc(100% - 48px), var(--wrap));
       border-radius: var(--m3-lg);
       border: 1px solid var(--lg-stroke);
       background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .045));
@@ -615,7 +617,7 @@
       -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(180%);
       backdrop-filter: blur(var(--lg-blur)) saturate(180%);
     }
-    .header-inner { max-width: none; height: 68px; padding-inline: 18px; }
+    .header-inner { max-width: none; height: 68px; padding-inline: 24px; }
     .nav a { border-radius: var(--m3-full); padding: 9px 14px; font-weight: 500; }
     .nav a:hover { background: rgba(255, 255, 255, .10); }
 
@@ -623,14 +625,14 @@
     .btn {
       border-radius: var(--m3-full);
       padding: 12px 20px; font-weight: 600; letter-spacing: -.005em;
-      transition: transform .32s var(--m3-spring), background .32s var(--m3-spring), box-shadow .32s var(--m3-spring), border-color .32s var(--m3-spring);
+      transition: transform .14s var(--m3-spring), background .14s ease, box-shadow .14s ease, border-color .14s ease;
     }
     .btn:hover { transform: translateY(-2px) scale(1.012); }
     .btn:active { transform: translateY(0) scale(.99); }
     .btn-primary {
-      background: linear-gradient(180deg, #6c88f7, var(--brand) 55%, var(--brand-hover));
-      border-color: rgba(255, 255, 255, .24);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), inset 0 -2px 8px rgba(0, 0, 0, .22), 0 18px 38px -20px rgba(77, 110, 242, .85);
+      background: var(--brand);
+      border-color: rgba(255, 255, 255, .18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .26), 0 18px 38px -26px rgba(77, 110, 242, .6);
     }
     .btn-ghost {
       background: rgba(255, 255, 255, .075);
@@ -657,22 +659,14 @@
     .hero-cta a[href*="hub.xerj.org"] {
       white-space: normal; text-align: start; line-height: 1.25;
       gap: 10px; font-size: .84rem; padding: 11px 14px;
-      border-color: rgba(143, 227, 221, .4);
-      background:
-        linear-gradient(150deg, rgba(143, 227, 221, .18), rgba(122, 140, 255, .2)),
-        rgba(255, 255, 255, .03);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .55),
-        inset 0 20px 34px -24px rgba(255, 255, 255, .5),
-        0 20px 44px -28px rgba(64, 214, 208, .55);
+      border-color: var(--lg-stroke);
+      background: rgba(255, 255, 255, .05);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
     }
     .hero-cta a[href*="hub.xerj.org"] svg { width: 18px; height: 18px; color: var(--accent); }
     .hero-cta a[href*="hub.xerj.org"]:hover {
-      border-color: rgba(143, 227, 221, .62);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .65),
-        inset 0 20px 34px -24px rgba(255, 255, 255, .6),
-        0 26px 56px -28px rgba(64, 214, 208, .7);
+      border-color: rgba(157, 185, 255, .55);
+      background: rgba(255, 255, 255, .08);
     }
 
     /* ---------------- hero ---------------- */
@@ -690,11 +684,7 @@
       font-size: clamp(2.5rem, 5.6vw, 4.5rem);
       letter-spacing: -.045em; line-height: 1.0; font-weight: 700;
     }
-    .hero h1 em {
-      background: linear-gradient(100deg, #8aa4ff, #8fe3dd 92%);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent; color: #8aa4ff;
-    }
+    .hero h1 em { color: var(--brand-soft); }
     .hero .lead { color: #b9c2d6; font-size: clamp(1rem, 1.4vw, 1.14rem); }
     .hero-meta { color: #8b94a8; font-size: .84rem; gap: 10px 16px; }
     .hero-meta span {
@@ -709,15 +699,13 @@
       border-radius: var(--m3-xl);
       border: 1px solid var(--lg-stroke);
       background: var(--lg-glass);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      backdrop-filter: blur(20px) saturate(160%);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .32), 0 30px 70px -46px rgba(0, 0, 0, .95);
-      transition: transform .4s var(--m3-spring), box-shadow .4s var(--m3-spring), border-color .4s var(--m3-spring);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 26px 60px -50px rgba(0, 0, 0, .9);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
     .card:hover, .doc:hover, .step-card:hover {
       transform: translateY(-3px);
       border-color: var(--lg-stroke-strong);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .42), 0 40px 80px -46px rgba(0, 0, 0, 1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16), 0 32px 70px -50px rgba(0, 0, 0, 1);
     }
     .section { padding: clamp(56px, 7vw, 92px) 0; }
     .section-head h2, .footer-cta h2 { letter-spacing: -.038em; }
@@ -799,6 +787,9 @@
     @media (prefers-reduced-motion: reduce) {
       .btn:hover, .btn:active, .card:hover, .doc:hover, .step-card:hover { transform: none; }
     }
+    /* ---------- escala de radios (reglas de diseño) ---------- */
+    .chat, .privacy, .rm, .timeline, .doc, details, .flow, .band-inner { border-radius: var(--m3-xl); }
+    .card .icon, .chat-avatar, .brand-mark img, .code, code, .card code { border-radius: var(--m3-md); }
   </style>  <style id="m3-motion">
     /* ===== Movimiento expresivo, barato de pintar =====
        Solo transform y opacity: nada de blur animado, nada atado al scroll.
@@ -829,31 +820,17 @@
       .roadmap > :nth-child(4):not(.in), .faq > :nth-child(4):not(.in) { transition-delay: .21s; }
       .features > :nth-child(5):not(.in), .features > :nth-child(6):not(.in) { transition-delay: .28s; }
 
-      /* Brillo que cruza los botones al pasar el ratón */
-      .btn { position: relative; overflow: hidden; }
-      .btn::before {
-        content: ""; position: absolute; inset: -45%; pointer-events: none;
-        background: linear-gradient(105deg, transparent 44%, rgba(255,255,255,.45) 50%, transparent 56%);
-        transform: translateX(-115%); transition: transform .8s ease;
-      }
-      .btn:hover::before { transform: translateX(115%); }
 
       /* Orbes de color que respiran detrás del contenido */
       .orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-      .orbs i { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5; will-change: transform; }
+      .orbs i { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5; }
       .orb-a {
         width: 520px; height: 520px; left: -160px; top: -120px;
         background: radial-gradient(circle, rgba(77,110,242,.5), transparent 65%);
-        animation: orb-drift 26s ease-in-out infinite alternate;
       }
       .orb-b {
         width: 460px; height: 460px; right: -140px; top: 24vh;
         background: radial-gradient(circle, rgba(64,214,208,.4), transparent 65%);
-        animation: orb-drift 34s ease-in-out infinite alternate-reverse;
-      }
-      @keyframes orb-drift {
-        from { transform: translate3d(0,0,0) scale(1); }
-        to { transform: translate3d(90px,60px,0) scale(1.08); }
       }
       @media (max-width: 880px) {
         .orbs i { opacity: .32; }
@@ -901,15 +878,6 @@
         transition: transform .25s ease;
       }
 
-      /* Brillo lento en la palabra destacada del titular */
-      .hero h1 em {
-        font-style: normal;
-        background: linear-gradient(100deg, var(--brand) 15%, #3fd6c8 40%, var(--brand) 65%);
-        background-size: 220% auto;
-        -webkit-background-clip: text; background-clip: text; color: transparent;
-        animation: m3-sheen 11s linear infinite;
-      }
-      @keyframes m3-sheen { to { background-position: 220% center; } }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -946,10 +914,16 @@
     }
     .rm-status.doing { color: #9db4ff; border-color: rgba(122,140,255,.45); background: rgba(77,110,242,.16); }
     .rm-status.next { color: var(--muted); border-color: var(--line); background: rgba(255,255,255,.04); }
-    .rm-status.done { color: #7df0dd; border-color: rgba(64,214,208,.45); background: rgba(64,214,208,.12); }
+    .rm-status.done { color: var(--brand-soft); border-color: rgba(157,185,255,.45); background: rgba(77,110,242,.12); }
     .rm h3 { margin: 0 0 6px; font-size: 1.05rem; }
     .rm p { margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.55; }
     @media (max-width: 760px) { .roadmap { grid-template-columns: 1fr; } }
+    /* ---------- reglas de diseño: una pieza de vidrio, un acento ---------- */
+    .chat { border-radius: var(--m3-xl); transform: rotate(0deg); }
+    .btn-ghost, .eyebrow, .hero-meta span, .lang, .rm { -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .rm { background: rgba(255, 255, 255, .05); }
+    .chat-avatar { background: var(--brand); }
+    .lang, .privacy .local { border-radius: var(--m3-md); }
   </style>
   </head>
 <body>
@@ -971,7 +945,7 @@
         <small data-i18n="hNote">Código abierto</small>
       </a>
 
-      <nav class="nav" id="nav" aria-label="Sections">
+      <nav class="nav" id="nav" aria-label="Sections" data-aria="hNav">
         <a href="#features" data-i18n="nFeat">Funciones</a>
         <a href="#how" data-i18n="nHow">Cómo funciona</a>
         <a href="#quickstart" data-i18n="nQuick">Instalación</a>
@@ -998,6 +972,7 @@
   </header>
 
   <main id="main">
+    <p class="sr-only" id="copy-status" role="status"></p>
     <div class="orbs" aria-hidden="true"><i class="orb-a"></i><i class="orb-b"></i></div>
     <section class="hero" id="top">
       <div class="wrap hero-grid">
@@ -1046,8 +1021,8 @@
             <div class="bubble in"><b>Ana</b><span data-i18n="chM1">¿Qué deberes hay de mates?</span></div>
             <div class="bubble note" data-i18n="chNote">Claw abrió una pregunta pendiente · 15 min</div>
             <div class="bubble in"><b>Lucía</b><span data-i18n="chM2">Páginas 30 a 32 del cuadernillo.</span></div>
-            <div class="bubble in"><b>Ana</b><span data-i18n="chM1">¿Qué deberes hay de mates?</span></div>
-            <div class="bubble claw"><b>Claw</b><span data-i18n="chM2">Páginas 30 a 32 del cuadernillo.</span></div>
+            <div class="bubble in"><b>Ana</b><span data-i18n="chM5">¿Lo apunto yo o lo haces tú?</span></div>
+            <div class="bubble claw"><b>Claw</b><span data-i18n="chM6">Ya está apuntado para el grupo.</span></div>
             <div class="bubble in"><b>Marc</b><span data-i18n="chM3">Claw, ¿cuánto es el 15 % de 240?</span></div>
             <div class="bubble claw"><b>Claw</b><span data-i18n="chM4">36.</span></div>
           </div>
@@ -1486,7 +1461,7 @@
 
       <div class="footer-bottom">
         <span><span data-i18n="ftBy">Claw · hecho por</span> <a href="https://github.com/ClawProject" target="_blank" rel="noopener" style="color:var(--muted)">ClawProject</a></span>
-        <nav aria-label="Footer">
+        <nav aria-label="Footer" data-aria="hFooter">
           <a href="#features" data-i18n="nFeat">Funciones</a>
           <a href="#how" data-i18n="nHow">Cómo funciona</a>
           <a href="#quickstart" data-i18n="nQuick">Instalación</a>
@@ -1532,6 +1507,12 @@
         hNote: 'Open source',
         hRepo: 'Repository',
         hLang: 'Language',
+        hNav: "Sections",
+        hFooter: "Footer",
+        hMenu: "Open menu",
+        hMenuClose: "Close menu",
+        chM5: "Should I note it down, or will you?",
+        chM6: "Already noted for the group.",
         nFeat: 'Features',
         nHow: 'How it works',
         nQuick: 'Quick start',
@@ -1763,6 +1744,12 @@
         hNote: 'Código abierto',
         hRepo: 'Repositorio',
         hLang: 'Idioma',
+        hNav: "Secciones",
+        hFooter: "Pie de página",
+        hMenu: "Abrir menú",
+        hMenuClose: "Cerrar menú",
+        chM5: "¿Lo apunto yo o lo haces tú?",
+        chM6: "Ya está apuntado para el grupo.",
         nFeat: 'Funciones',
         nHow: 'Cómo funciona',
         nQuick: 'Instalación',
@@ -1994,6 +1981,12 @@
         hNote: 'Codi obert',
         hRepo: 'Repositori',
         hLang: 'Idioma',
+        hNav: "Seccions",
+        hFooter: "Peu de pàgina",
+        hMenu: "Obrir menú",
+        hMenuClose: "Tancar menú",
+        chM5: "Ho apunto jo o ho fas tu?",
+        chM6: "Ja està apuntat per al grup.",
         nFeat: 'Funcions',
         nHow: 'Com funciona',
         nQuick: 'Instal·lació',
@@ -2225,6 +2218,12 @@
         hNote: 'Open source',
         hRepo: 'Dépôt',
         hLang: 'Langue',
+        hNav: "Sections",
+        hFooter: "Pied de page",
+        hMenu: "Ouvrir le menu",
+        hMenuClose: "Fermer le menu",
+        chM5: "Je le note ou tu t'en occupes ?",
+        chM6: "C'est noté pour le groupe.",
         nFeat: 'Fonctions',
         nHow: 'Fonctionnement',
         nQuick: 'Installation',
@@ -2456,6 +2455,12 @@
         hNote: 'Código aberto',
         hRepo: 'Repositório',
         hLang: 'Idioma',
+        hNav: "Secções",
+        hFooter: "Rodapé",
+        hMenu: "Abrir menu",
+        hMenuClose: "Fechar menu",
+        chM5: "Anoto eu ou fazes tu?",
+        chM6: "Já está anotado para o grupo.",
         nFeat: 'Funcionalidades',
         nHow: 'Como funciona',
         nQuick: 'Instalação',
@@ -2687,6 +2692,12 @@
         hNote: 'Open Source',
         hRepo: 'Repository',
         hLang: 'Sprache',
+        hNav: "Bereiche",
+        hFooter: "Fußzeile",
+        hMenu: "Menü öffnen",
+        hMenuClose: "Menü schließen",
+        chM5: "Soll ich es notieren, oder machst du das?",
+        chM6: "Schon für die Gruppe notiert.",
         nFeat: 'Funktionen',
         nHow: 'So funktioniert es',
         nQuick: 'Schnellstart',
@@ -2918,6 +2929,12 @@
         hNote: 'Open source',
         hRepo: 'Repository',
         hLang: 'Lingua',
+        hNav: "Sezioni",
+        hFooter: "Piè di pagina",
+        hMenu: "Apri menu",
+        hMenuClose: "Chiudi menu",
+        chM5: "Lo segno io o lo fai tu?",
+        chM6: "Già annotato per il gruppo.",
         nFeat: 'Funzioni',
         nHow: 'Come funziona',
         nQuick: 'Installazione',
@@ -3149,6 +3166,12 @@
         hNote: 'Открытый код',
         hRepo: 'Репозиторий',
         hLang: 'Язык',
+        hNav: "Разделы",
+        hFooter: "Подвал",
+        hMenu: "Открыть меню",
+        hMenuClose: "Закрыть меню",
+        chM5: "Мне записать или ты?",
+        chM6: "Уже записано для группы.",
         nFeat: 'Возможности',
         nHow: 'Как это работает',
         nQuick: 'Быстрый старт',
@@ -3380,6 +3403,12 @@
         hNote: 'مفتوح المصدر',
         hRepo: 'المستودع',
         hLang: 'اللغة',
+        hNav: "الأقسام",
+        hFooter: "التذييل",
+        hMenu: "فتح القائمة",
+        hMenuClose: "إغلاق القائمة",
+        chM5: "أأسجّلها أنا أم أنت؟",
+        chM6: "سُجّلت للمجموعة.",
         nFeat: 'المزايا',
         nHow: 'كيف يعمل',
         nQuick: 'البدء السريع',
@@ -3611,6 +3640,12 @@
         hNote: '开源',
         hRepo: '仓库',
         hLang: '语言',
+        hNav: "页面分区",
+        hFooter: "页脚",
+        hMenu: "打开菜单",
+        hMenuClose: "关闭菜单",
+        chM5: "我来记还是你来记？",
+        chM6: "已为群组记下。",
         nFeat: '功能',
         nHow: '工作原理',
         nQuick: '快速开始',
@@ -3824,8 +3859,24 @@
     const nodes = [...document.querySelectorAll('[data-i18n]')];
     const ORIGINAL = new Map(nodes.map((el) => [el, el.innerHTML]));
     const metaDesc = document.querySelector('meta[name="description"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
     const ORIGINAL_TITLE = document.title;
     const ORIGINAL_DESC = metaDesc ? metaDesc.content : '';
+    const ORIGINAL_OG_TITLE = ogTitle ? ogTitle.content : '';
+    const ORIGINAL_OG_DESC = ogDesc ? ogDesc.content : '';
+    const ARIA_NODES = [...document.querySelectorAll('[data-aria]')];
+    const ARIA_ORIGINAL = new Map(ARIA_NODES.map((el) => [el, el.getAttribute('aria-label') || '']));
+    const OG_LOCALES = { es: 'es_ES', en: 'en_US', ca: 'ca_ES', fr: 'fr_FR', pt: 'pt_PT', de: 'de_DE', it: 'it_IT', ru: 'ru_RU', ar: 'ar_SA', zh: 'zh_CN' };
+
+    function setMenuLabel(code) {
+      const btn = document.getElementById('menu-btn');
+      if (!btn) return;
+      const dict = LOCALES[code];
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-label', (dict && (open ? dict.hMenuClose : dict.hMenu)) || (open ? 'Close menu' : 'Open menu'));
+    }
 
     const select = document.getElementById('lang');
     ORDER.filter((code) => code === 'en' || LOCALES[code]).forEach((code) => {
@@ -3871,6 +3922,11 @@
       document.title = (dict && dict.metaTitle) || ORIGINAL_TITLE;
       if (metaDesc) metaDesc.content = (dict && dict.metaDesc) || ORIGINAL_DESC;
       select.setAttribute('aria-label', (dict && dict.hLang) || 'Language');
+      ARIA_NODES.forEach((el) => el.setAttribute('aria-label', (dict && dict[el.dataset.aria]) || ARIA_ORIGINAL.get(el)));
+      setMenuLabel(code);
+      if (ogTitle) ogTitle.content = (dict && dict.metaTitle) || ORIGINAL_OG_TITLE;
+      if (ogDesc) ogDesc.content = (dict && dict.metaDesc) || ORIGINAL_OG_DESC;
+      if (ogLocale) ogLocale.content = OG_LOCALES[code] || 'es_ES';
     }
 
     // Shows a language without remembering it, so the automatic pick keeps
@@ -3898,13 +3954,19 @@
     // mobile menu
     const menuBtn = document.getElementById('menu-btn');
     const nav = document.getElementById('nav');
-    const closeMenu = () => { header.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded', 'false'); };
+    const closeMenu = (refocus) => {
+      header.classList.remove('nav-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      setMenuLabel(document.documentElement.lang);
+      if (refocus) menuBtn.focus();
+    };
     menuBtn.addEventListener('click', () => {
       const open = header.classList.toggle('nav-open');
       menuBtn.setAttribute('aria-expanded', String(open));
+      setMenuLabel(document.documentElement.lang);
     });
-    nav.addEventListener('click', (event) => { if (event.target.closest('a')) closeMenu(); });
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
+    nav.addEventListener('click', (event) => { if (event.target.closest('a')) closeMenu(false); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && header.classList.contains('nav-open')) closeMenu(true); });
 
     // copy buttons
     document.querySelectorAll('.copy').forEach((button) => {
@@ -3924,6 +3986,8 @@
         const dict = LOCALES[document.documentElement.lang];
         button.classList.add('done');
         label.textContent = (dict && dict.uiCopied) || 'Copied';
+        const status = document.getElementById('copy-status');
+        if (status) status.textContent = label.textContent;
         setTimeout(() => { button.classList.remove('done'); label.textContent = original; }, 1600);
       });
     });

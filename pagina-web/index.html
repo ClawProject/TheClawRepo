@@ -1,6 +1,74 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr"><head>
   <meta charset="utf-8">
+  <script>
+  /* Bloqueo para Ladybird: si se usa ese navegador, no se permite usar la página. */
+  (function () {
+    "use strict";
+    var ua = (navigator.userAgent || "") + " " + (navigator.appVersion || "");
+    var brands = (navigator.userAgentData && navigator.userAgentData.brands) || [];
+    var esLadybird = /ladybird/i.test(ua) ||
+      brands.some(function (b) { return /ladybird/i.test(b && b.brand || ""); });
+    if (!esLadybird) return;
+
+    var MENSAJE = "Decencia Humana es necesaria para ver esta página. " +
+      "Valoramos a todo tipos de usuarios por eso pedimos que cambies a firefox o a helium";
+
+    /* Detener la carga del resto de la página (CSS, fuentes, imágenes, scripts...). */
+    try { window.stop(); } catch (_) {}
+
+    var root = document.documentElement;
+    root.classList.add("ladybird-blocked");
+
+    var style = document.createElement("style");
+    style.textContent =
+      "html.ladybird-blocked { overflow: hidden !important; }" +
+      "html.ladybird-blocked > *:not(#ladybird-blocker) { display: none !important; }" +
+      "#ladybird-blocker { position: fixed; inset: 0; z-index: 2147483647;" +
+      " display: flex; align-items: center; justify-content: center; box-sizing: border-box;" +
+      " margin: 0; padding: clamp(24px, 5vw, 64px); background: #f6f5f1; color: #111110;" +
+      " font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;" +
+      " font-size: clamp(1.1rem, 2.2vw, 1.6rem); line-height: 1.5; text-align: center;" +
+      " user-select: none; cursor: default; }" +
+      "#ladybird-blocker p { max-width: 60ch; margin: 0; }";
+    (document.head || root).appendChild(style);
+
+    var blocker = document.createElement("div");
+    blocker.id = "ladybird-blocker";
+    blocker.setAttribute("role", "alert");
+    blocker.setAttribute("lang", "es");
+    var p = document.createElement("p");
+    p.textContent = MENSAJE;
+    blocker.appendChild(p);
+    root.appendChild(blocker);
+
+    /* Impedir cualquier interacción con la página. */
+    function bloquear(e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+      return false;
+    }
+    var eventos = ["click", "dblclick", "mousedown", "mouseup", "pointerdown", "pointerup",
+      "keydown", "keyup", "keypress", "touchstart", "touchend", "touchmove", "wheel",
+      "scroll", "contextmenu", "submit", "focus", "focusin", "input", "change",
+      "dragstart", "drop", "select", "copy", "cut", "paste"];
+    eventos.forEach(function (tipo) { window.addEventListener(tipo, bloquear, true); });
+
+    function aislar() {
+      if (document.body) {
+        document.body.setAttribute("inert", "");
+        document.body.setAttribute("aria-hidden", "true");
+      }
+      if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aislar);
+    } else {
+      aislar();
+    }
+  })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f5f1">
   <title>Claw — un asistente de WhatsApp autoalojado para la vida escolar</title>

@@ -20,3 +20,10 @@ data/
 
 # Metadatos locales de la app de escritorio Freebuff. NUNCA subir a Git.
 .freebuff/
+
+# Archivos locales no versionados: preview, variantes de diseño y skills de agente.
+.agents/
+pagina-web/.preview.mjs
+pagina-web/.preview.pid
+pagina-web/variantes/
+skills-lock.json
